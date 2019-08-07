@@ -9,11 +9,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String TAG = "RC3.MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uiConnectionPicker(){
-        String[] colors = {"BlueTooth Gatt", "WiFi"};
+        String[] connectionTypes = {"BlueTooth Gatt", "WiFi"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Connection type");
-        builder.setItems(colors, new DialogInterface.OnClickListener() {
+        builder.setItems(connectionTypes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // the user clicked on colors[which]
+                Log.d(TAG, String.format("onClick: which:[%d]", which) );
             }
         });
         builder.show();
