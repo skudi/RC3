@@ -1,7 +1,10 @@
 package org.skd.rc3;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,10 +16,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import org.skd.rc3.blgatt.DeviceScanActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "RC3.MainActivity";
+    private final int BLUETOOTHLE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.d(TAG, String.format("onClick: which:[%d]", which) );
+                Toast.makeText(MainActivity.this,"You picked: " + which,Toast.LENGTH_LONG).show();
+                switch (which) {
+                    case BLUETOOTHLE: {
+                            final Intent blScannerUi = new Intent();
+                            blScannerUi.setClassName(DeviceScanActivity.class.getPackage().getName()
+                                    , DeviceScanActivity.class.getName() );
+                            startActivity(blScannerUi);
+                    }
+                }
+                dialog.dismiss();
             }
         });
         builder.show();
